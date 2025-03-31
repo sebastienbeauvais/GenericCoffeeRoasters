@@ -26,11 +26,14 @@ namespace GenericCoffeeRoasters.Entrance
         private void GetMenu()
         {
             PrintMenuHeader();
-            foreach(var beverage in _beverages)
+            foreach (var beverage in _beverages)
             {
-                foreach (var condiments in _condimentDecorator)
+                Console.WriteLine($"{beverage.GetDescription()} - {beverage.Cost():F2}");
+
+                foreach (var condiment in _condimentDecorator)
                 {
-                    Console.WriteLine(beverage.GetDescription() + " " + condiments.GetDescription() + " - " + beverage.Cost());
+                    var decoratedBeverage = (Beverage)Activator.CreateInstance(condiment.GetType(), beverage);
+                    Console.WriteLine($"{decoratedBeverage.GetDescription()} - {decoratedBeverage.Cost():F2}");
                 }
             }
             PrintMenuFooter();

@@ -8,10 +8,8 @@ namespace GenericCoffeeRoasters.Models.DecoratorClasses
 {
     public class SteamedMilk : CondimentDecorator
     {
-        public SteamedMilk(Beverage beverage) 
-        {
-            this.beverage = beverage;
-        }
+        public SteamedMilk(Beverage beverage) : base(beverage) { }
+
         public override string GetDescription()
         {
             return beverage.GetDescription() + " Steamed milk";

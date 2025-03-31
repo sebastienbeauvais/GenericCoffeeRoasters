@@ -8,10 +8,7 @@ namespace GenericCoffeeRoasters.Models.DecoratorClasses
 {
     public class Mocha : CondimentDecorator
     {
-        public Mocha(Beverage beverage)
-        {
-            this.beverage = beverage;
-        }
+        public Mocha(Beverage beverage) : base(beverage) { }
         public override string GetDescription()
         {
             return beverage.GetDescription() + " Mocha";

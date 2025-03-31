@@ -8,7 +8,15 @@ namespace GenericCoffeeRoasters.Models
 {
     public abstract class CondimentDecorator : Beverage
     {
-        public Beverage beverage;
-        public abstract string GetDescription();
+        protected Beverage beverage;
+        public CondimentDecorator(Beverage beverage)
+        {
+            this.beverage = beverage;
+        }
+
+        public override string GetDescription()
+        {
+            return beverage.GetDescription();
+        }
     }
 }

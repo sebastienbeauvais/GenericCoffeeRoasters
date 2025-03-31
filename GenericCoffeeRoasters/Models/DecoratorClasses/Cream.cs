@@ -8,10 +8,7 @@ namespace GenericCoffeeRoasters.Models.DecoratorClasses
 {
     public class Cream : CondimentDecorator
     {
-        public Cream(Beverage beverage) 
-        {
-            this.beverage = beverage;
-        }
+        public Cream(Beverage beverage) : base(beverage) { }
         public override string GetDescription()
         {
             return beverage.GetDescription() + " Cream";
