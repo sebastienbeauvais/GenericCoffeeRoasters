@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace GenericCoffeeRoasters.Entrance
 {
@@ -28,13 +29,9 @@ namespace GenericCoffeeRoasters.Entrance
             PrintMenuHeader();
             foreach (var beverage in _beverages)
             {
-                Console.WriteLine($"{beverage.GetDescription()} - {beverage.Cost():F2}");
+                Console.WriteLine($"{beverage.GetDescription()} - ${beverage.Cost():F2}");
 
-                foreach (var condiment in _condimentDecorator)
-                {
-                    var decoratedBeverage = (Beverage)Activator.CreateInstance(condiment.GetType(), beverage);
-                    Console.WriteLine($"{decoratedBeverage.GetDescription()} - {decoratedBeverage.Cost():F2}");
-                }
+                GenerateMenuCombinations(beverage, _condimentDecorator.ToList(), 0);
             }
             PrintMenuFooter();
         }
@@ -45,6 +42,17 @@ namespace GenericCoffeeRoasters.Entrance
         private void PrintMenuFooter()
         {
             Console.WriteLine("===================================================================\n");
+        }
+        private void GenerateMenuCombinations(Beverage beverage, List<CondimentDecorator> condiments, int index)
+        {
+            for (int i = index; i < condiments.Count; i++)
+            {
+                Beverage decoratedBeverage = (Beverage)Activator.CreateInstance(condiments[i].GetType(), beverage);
+                Console.WriteLine($"{decoratedBeverage.GetDescription()} - ${decoratedBeverage.Cost():F2}");
+
+                // Recursively apply more condiments
+                GenerateMenuCombinations(decoratedBeverage, condiments, i + 1);
+            }
         }
     }
 }

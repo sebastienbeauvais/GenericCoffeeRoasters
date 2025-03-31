@@ -12,7 +12,7 @@ namespace GenericCoffeeRoasters.Models.DecoratorClasses
 
         public override string GetDescription()
         {
-            return beverage.GetDescription() + " Steamed milk";
+            return beverage.GetDescription() + " Steamed Milk";
         }
         public override double Cost()
         {
